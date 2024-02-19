@@ -16,11 +16,11 @@ This Python script monitors for the presence of a specific YubiKey. If the YubiK
 	cd yubikey-logout-monitor
 	```
 
-2. Edit the `monitor.py` script and set the `yubikey_sn` variable to the serial number of your YubiKey. If you don't know the serial number of your YubiKey, you can run the script with an empty `yubikey_sn` and it will print the serial number of the connected YubiKey.
+2. Edit the `config.py` script and set the `device_id` variable to the serial number of your YubiKey. If you don't know the serial number of your YubiKey, you can run the script with an empty `device_id` and it will print the serial number of the connected YubiKey.
 
 3. Run the script:
 
-	```bash
+	```python
 	python monitor.py
 	```
 
@@ -34,8 +34,8 @@ This Python script monitors for the presence of a specific YubiKey. If the YubiK
 
 ## Notes
 
-- This script is currently configured for macOS. If you're using a different operating system, you might need to modify the `yubikey_check` and `lockscreen` commands. Some alternative commands for Linux are included in the script, but they are commented out.
-- The script uses a lock file (`/tmp/monitor.lock`) to ensure that only one instance of the script is running at a time.
+- This script is currently configured for macOS. If you're using a different operating system, you might need to modify the `device_check_command` and `lock_command` commands. Some alternative commands for Linux are included in the script, but they are commented out.
+- The script uses a lock file (`/tmp/LockOMaticUSB.lock`) to ensure that only one instance of the script is running at a time.
 - The script registers handlers for the `SIGINT`, `SIGTERM`, and `SIGQUIT` signals. If it receives one of these signals, it will print a message and exit.
 - The `debug` variable controls whether the script prints debug information. If `debug` is `True`, the script will print messages when it checks for the YubiKey and when it locks the screen. If `debug` is `False`, the script will not print these messages.
 - The `test` variable controls whether the script actually locks the screen. If `test` is `True`, the script will print a message instead of locking the screen when the YubiKey is removed. If `test` is `False`, the script will lock the screen when the YubiKey is removed.
