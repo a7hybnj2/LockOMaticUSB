@@ -12,7 +12,7 @@ import time
 import config
 
 # Lock file
-lock_file = '/tmp/monitor.lock'
+lock_file = '/tmp/LockOMaticUSB.lock'
 lock_file = open(lock_file, 'w')
 
 # Pause file
