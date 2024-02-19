@@ -1,0 +1,27 @@
+#!/usr/local/bin/python3
+
+# NOTE: Set this during setup. Prevents logoff and provides some feedback
+test = True
+debug = True
+
+# NOTE: This list command should handle checking multiple yubikeys but I only have one so I haven't tested.
+device_check_command = r"/Applications/YubiKey\ Manager.app/Contents/MacOS/ykman list"
+#yubikey_check = "ykman list"
+
+# NOTE: This is the serial number of the yubikey. It's used to check if the yubikey is plugged in.
+device_id = ""
+
+# NOTE: The following command uses applescript to lock the screen. It's a bit of a hack but it works.
+# NOTE: I did need to modify accessibility permissions to allow for the scrip to send the keystrokes
+lock_command = 'osascript -e \'tell application "System Events" to keystroke "q" using {control down, command down}\''
+#lock_command = "xdg-screensaver lock"
+
+# NOTE: The following command is a more aggressive command. It forces logout and doesn't save anything.
+# NOTE: It also requires admin privileges to run. I'm not using it but I'm leaving it here for reference.
+# NOTE: It also messes up my pgp signing and I have to issue a `gpgconf --kill gpg-agent` to fix it.
+#lock_command = "launchctl bootout user/" + str(os.getuid())
+#lock_command = "pkill -KILL -u " + str(os.getuid())
+
+# NOTE: If you feel like this is a security risk then you can set this file name to be something completely unique.
+pause_path = '~'
+pause_filename = '.LockOMaticUSB_pause'
