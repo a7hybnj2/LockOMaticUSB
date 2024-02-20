@@ -1,6 +1,14 @@
-# YubiKey Logout Monitor
+# LockOMaticUSB
 
-This Python script monitors for the presence of a specific YubiKey. If the YubiKey is removed, the script locks the screen.
+LockOMaticUSB is a Python-based security tool for macOS and Linux that automatically locks or logs off your computer when a designated USB or YubiKey device is removed, ensuring enhanced physical security.
+
+## To Do:
+- [ ] Implement USB uuid checking.
+- [ ] Make the config switch between mac/linux easier
+- [ ] Test on windows
+- [ ] Add best practices
+- [ ] Add FAQ
+- [ ] Add tested devices
 
 ## Prerequisites
 
@@ -12,8 +20,8 @@ This Python script monitors for the presence of a specific YubiKey. If the YubiK
 1. Clone this repository:
 
 	```bash
-	git clone https://github.com/yourusername/yubikey-logout-monitor.git
-	cd yubikey-logout-monitor
+	git clone https://github.com/a7hybnj2/LockOMaticUSB.git
+	cd LockOMaticUSB
 	```
 
 2. Edit the `config.py` script and set the `device_id` variable to the serial number of your YubiKey. If you don't know the serial number of your YubiKey, you can run the script with an empty `device_id` and it will print the serial number of the connected YubiKey.
