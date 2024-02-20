@@ -3,7 +3,7 @@
 LockOMaticUSB is a Python-based security tool for macOS and Linux that automatically locks or logs off your computer when a designated USB or YubiKey device is removed, ensuring enhanced physical security.
 
 ## To Do:
-- [ ] Implement USB uuid checking.
+- [ ] Implement USB uuid checking
 - [ ] Make the config switch between mac/linux easier
 - [ ] Test on windows
 - [ ] Add best practices
