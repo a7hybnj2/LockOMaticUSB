@@ -60,16 +60,24 @@ if config.device_id == "":
         print("Serial number not found, please connect a Yubikey and try again.")
     sys.exit(0)
 
+last_seen = time.time()
+key_removed = False
+
 while (1):
     if not os.path.exists(pause_file):
         time.sleep(.5)
         output = os.popen(config.device_check_command).read().strip()
         if config.device_id not in output:
+            if not key_removed:
+                last_seen = time.time()
+                key_removed = True
             if not(config.test):
-                os.system(config.lock_command)
+                if time.time() - last_seen > 1:
+                    os.system(config.lock_command)
             else:
                 print("Yubikey not found. Locking screen(pretend).")
         else:
+            key_removed = False
             if config.debug:
                 print(output)
     else:
