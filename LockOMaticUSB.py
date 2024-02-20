@@ -64,13 +64,14 @@ while (1):
     if not os.path.exists(pause_file):
         time.sleep(.5)
         output = os.popen(config.device_check_command).read().strip()
-        if config.debug:
-            print(output)
         if config.device_id not in output:
             if not(config.test):
                 os.system(config.lock_command)
             else:
                 print("Yubikey not found. Locking screen(pretend).")
+        else:
+            if config.debug:
+                print(output)
     else:
         time.sleep(1)
         if config.debug:
