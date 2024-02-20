@@ -1,3 +1,4 @@
 config.py
-com.user.LockOMaticUSB.plist
+*LockOMaticUSB.plist
 __pycache__
+*.log
