@@ -63,11 +63,16 @@ if config.device_id == "":
 
 last_seen = time.time()
 key_removed = False
+prev_locked = False
+unlock_time = None
 
 while (1):
 
     session_info = Quartz.CGSessionCopyCurrentDictionary()
     is_locked = session_info and session_info.get("CGSSessionScreenIsLocked", 0) == 1
+
+    if prev_locked and not is_locked:
+        time.sleep(30)
 
     if not is_locked:
         if not os.path.exists(pause_file):
@@ -90,3 +95,5 @@ while (1):
         time.sleep(1)
         if config.debug:
             print("Pause file found. Paused.")
+
+    prev_locked = is_locked
