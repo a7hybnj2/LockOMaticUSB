@@ -3,6 +3,7 @@
 import os
 import signal
 import sys
+import Quartz
 # NOTE: getpass is for the logout command. I'm not using it but I'm leaving it here for reference.
 # import getpass
 import fcntl
@@ -64,22 +65,27 @@ last_seen = time.time()
 key_removed = False
 
 while (1):
-    if not os.path.exists(pause_file):
-        time.sleep(.5)
-        output = os.popen(config.device_check_command).read().strip()
-        if config.device_id not in output:
-            if not key_removed:
-                last_seen = time.time()
-                key_removed = True
-            if not(config.test):
-                if time.time() - last_seen > 1:
-                    os.system(config.lock_command)
+
+    session_info = Quartz.CGSessionCopyCurrentDictionary()
+    is_locked = session_info and session_info.get("CGSSessionScreenIsLocked", 0) == 1
+
+    if not is_locked:
+        if not os.path.exists(pause_file):
+            time.sleep(.5)
+            output = os.popen(config.device_check_command).read().strip()
+            if config.device_id not in output:
+                if not key_removed:
+                    last_seen = time.time()
+                    key_removed = True
+                if not(config.test):
+                    if time.time() - last_seen > 1:
+                        os.system(config.lock_command)
+                else:
+                    print("Yubikey not found. Locking screen(pretend).")
             else:
-                print("Yubikey not found. Locking screen(pretend).")
-        else:
-            key_removed = False
-            if config.debug:
-                print(output)
+                key_removed = False
+                if config.debug:
+                    print(output)
     else:
         time.sleep(1)
         if config.debug:
