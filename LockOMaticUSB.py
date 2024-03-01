@@ -72,6 +72,7 @@ while (1):
     is_locked = session_info and session_info.get("CGSSessionScreenIsLocked", 0) == 1
 
     if prev_locked and not is_locked:
+        # some of these things should be moved to the config
         time.sleep(30)
 
     if not is_locked:
