@@ -77,7 +77,6 @@ while (1):
 
     if not is_locked:
         if not os.path.exists(pause_file):
-            time.sleep(.5)
             output = os.popen(config.device_check_command).read().strip()
             if config.device_id not in output:
                 if not key_removed:
@@ -93,8 +92,8 @@ while (1):
                 if config.debug:
                     print(output)
     else:
-        time.sleep(1)
         if config.debug:
             print("Pause file found. Paused.")
-
+    
+    time.sleep(.5)
     prev_locked = is_locked
